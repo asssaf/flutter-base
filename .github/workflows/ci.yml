@@ -50,8 +50,18 @@ jobs:
           name: linux-release-binary
           path: build/linux/x64/release/bundle/
 
+      - name: Setup Pages
+        if: github.event_name == 'push' && github.ref == 'refs/heads/master'
+        id: pages
+        uses: actions/configure-pages@983d7736d9b0ae728b81ab479565c72886d7745b # v5.0.0
+
       - name: Build Web
-        run: flutter build web --release --base-href "${{ secrets.BASE_HREF }}"
+        run: |
+          BASE_HREF="/"
+          if [ "${{ github.event_name }}" == "push" ] && [ "${{ github.ref }}" == "refs/heads/master" ]; then
+            BASE_HREF="${{ steps.pages.outputs.base_path }}/"
+          fi
+          flutter build web --release --base-href "$BASE_HREF"
 
       - name: Upload Web artifact
         if: github.event_name == 'push' && github.ref == 'refs/heads/master'
