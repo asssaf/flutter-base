@@ -34,3 +34,12 @@ To run the widget tests:
 flutter test
 ```
 
+### Building
+
+You can build for web without additional dependencies:
+```bash
+flutter pub get
+flutter build web
+```
+
+For other targets (android, linux, etc.), more dependencies are needed.
