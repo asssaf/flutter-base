@@ -22,8 +22,10 @@ If a reviewer tells you that a version is hallucinated or doesn't exist, don't d
 
 ## General Notes
 
-- You are running in a container that doesn't keep installed tools across sessions. Therefore you need to install tools (using sudo apt install) before calling them. Don't ever assume a tool is installed unless you installed it in this session.
-- Whenever adding a new tool, also add the installation command(s) to scripts/dev-setup.sh so it can be reinstalled in future sessions 
+- You are running in a container that doesn't keep installed tools across sessions. Therefore you need to install tools before calling them. Don't ever assume a tool is installed unless you installed it in this session.
+- When installing a needed tool, try to install it using `mise` if available. Otherwise, install it to `~/host-cache/<tool>/<version>` by adding the i
+nstallation commands to the `scripts/dev-setup.sh` script. Ensure the script checks if the specific tool version is already present before installing
+it, to avoid unnecessary downloads and prevent overwriting existing installations.
 - The primary branch for this repository is `master`.
 - When making changes to the codebase, ensure that `README.md` and the technical specifications in the `specs/` directory are updated if the changes are relevant to documented features.
 - Before submitting any changes, you must run the appropriate lint and format tools locally to ensure the code complies with the project's standards and doesn't fail in the CI workflow
