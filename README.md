@@ -15,9 +15,12 @@ A clean, modern, and interactive "Hello World" application built with Flutter.
 
 To run this application, make sure the Flutter SDK is installed and added to your environment path.
 
+This repository supports toolchain and environment management using the **Mise** polyglot tool manager configured in [mise.toml](mise.toml). Sourcing
+[scripts/dev-setup.sh](scripts/dev-setup.sh) bootstraps `mise` under `~/host-cache/mise/bin/`, installs the declared tools, and activates them.
+
 If you are using this workspace, you can initialize/re-install dependencies by running:
 ```bash
-./scripts/dev-setup.sh
+source ./scripts/dev-setup.sh
 ```
 
 ### Running the App
@@ -34,3 +37,12 @@ To run the widget tests:
 flutter test
 ```
 
+### Building
+
+You can build for web without additional dependencies:
+```bash
+flutter pub get
+flutter build web
+```
+
+For other targets (android, linux, etc.), more dependencies are needed.
